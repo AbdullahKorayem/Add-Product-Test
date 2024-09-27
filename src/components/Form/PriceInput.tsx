@@ -36,7 +36,7 @@ const PriceInput: React.FC<CustomInputProps> = ({
     };
 
     return (
-        <div className="flex flex-col gap-1">
+        <section className="flex flex-col gap-1">
             <label
                 className={classNames('text-base pb-1', {
                     'text-gray-700': !meta.error || !meta.touched,
@@ -73,7 +73,7 @@ const PriceInput: React.FC<CustomInputProps> = ({
                 className="pt-1 ml-1 text-xs text-red-500"
                 id={`${name}-error`}
             />
-        </div>
+        </section>
     );
 };
 

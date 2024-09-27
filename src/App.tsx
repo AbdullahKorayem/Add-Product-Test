@@ -1,14 +1,22 @@
-import AddProductModal from "./components/AddProductModal";
+import Nav from "./components/Nav/Nav";
+import PaginationComponent from "./components/Pagination/PaginationComponent";
+import ProductCard from "./components/ProductItems/ProductCard";
 
 function App() {
     return (
-        <body className="font-body">
-            <div className="flex justify-center items-center h-screen ">
-                <h1 className='bg-gray-100 text-4xl p-20 rounded-md shadow-sm'>Setting up everything new Product</h1>
-                <AddProductModal />
+        <div className="flex items-center justify-center w-screen h-screen bg-gray-100 font-body">
+            <div className="flex flex-col items-center justify-center w-full h-auto p-8 bg-white rounded max-w-screen-2xl">
+                <Nav />
+                <div className="flex gap-6">
+                    
+                <ProductCard />
+                <ProductCard />
+                <ProductCard />
+                </div>
+                <PaginationComponent />
             </div>
-        </body>
-    )
+        </div>
+    );
 }
 
 export default App;

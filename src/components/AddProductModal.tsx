@@ -15,7 +15,8 @@ export default function AddProductModal() {
     }
 
     return (
-        <>
+        <section className='pb-1'>
+            
             <Button
                 onClick={open}
                 className="px-5 py-3 flex text-sm font-base text-black bg-[#D9F99D] rounded items-center gap-2"
@@ -35,7 +36,7 @@ export default function AddProductModal() {
                     <div className="flex items-center justify-center min-h-full p-4">
                         <DialogPanel
                             transition
-                            className="w-full max-w-[1500px] rounded-xl bg-[#FFFFFF] p-10 shadow-lg transition-all duration-300 ease-in-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+                            className="w-full max-w-[1500px] rounded bg-[#FFFFFF] p-10 shadow-lg transition-all duration-300 ease-in-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
                         >
                             <div className="flex items-center justify-between mb-5">
                                 <DialogTitle as="h2" className="text-2xl font-medium text-black">
@@ -54,6 +55,6 @@ export default function AddProductModal() {
                     </div>
                 </div>
             </Dialog>
-        </>
+        </section>
     )
 }

@@ -9,6 +9,9 @@ import UploadImage from "./UploadImage";
 import SwitchInput from "./SwitchInput";
 import PriceInput from "./PriceInput";
 import { initialProductFormValues, validationSchema } from "../../utils/schema";
+import { categoryOptions } from "../../utils/lib";
+import { setLocaleStorage } from "@/utils/fucntions";
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -16,10 +19,19 @@ const ProductForm = () => {
 
     const onSubmit = async (values: typeof initialProductFormValues, { setSubmitting, resetForm }: any) => {
         try {
-            console.log("Submitted Values:", values);
+            const productsWithId = {
+                ...values, id: uuidv4(),
+                productImage: {
+                    lastModified: values.productImage?.lastModified,
+                    lastModifiedDate: new Date(values.productImage?.lastModified),
+                    name: values.productImage?.name,
+                    size: values.productImage?.size,
+                    type: values.productImage?.type,
+                    relativePath: values.productImage?.webkitRelativePath
+                }
+            }
+            setLocaleStorage(productsWithId)
             toast.success('Product uploaded successfully!');
-
-
 
             setSubmitting(false);
             resetForm();
@@ -29,12 +41,9 @@ const ProductForm = () => {
         }
     };
 
-    // const localStorageCart = JSON.parse(localStorage.getItem('products') || '[]')
 
 
     return (
-
-
         <>
             <Formik
                 initialValues={initialProductFormValues}
@@ -43,7 +52,7 @@ const ProductForm = () => {
             >
                 {({ isSubmitting }) => (
                     <Form className="space-y-5 ">
-                            <UploadImage name="ProductImage" label="Upload Photo" />
+                        <UploadImage name="productImage" label="Upload Photo" />
                         <CustomInput
                             name="title"
                             label='Title'
@@ -54,14 +63,14 @@ const ProductForm = () => {
                             label="Describe Your Item"
                             as="textarea"
                         />
-                        <SwitchInput name='category' label="Category" />
+                        <SwitchInput name='category' label="Category" options={categoryOptions} optional />
                         <PriceInput label="Item price" name="itemPrice" placeholder="00.00" />
 
                         <div className="flex flex-col gap-4 ">
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="font-semibold rounded-md bg-[#D9F99D] p-3 active:scale-[.99] duration-200 transition-all"
+                                className="font-semibold rounded-md flex justify-center items-center bg-[#D9F99D] p-3 active:scale-[.99] duration-200 transition-all"
                             >
                                 {isSubmitting ? (
                                     <>

@@ -1,51 +1,55 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { ErrorMessage, useField } from 'formik';
-import classNames from 'classnames';
+
+interface Option {
+    value: string;
+    label: string;
+}
 
 interface SwitchProps {
     name: string;
     label: string;
+    options: Option[];
+    optional?: boolean;
+    onChange?: (value: string) => void;
 }
 
-const categoryOptions = [
-    { value: 'shirts', label: 'Shirts' },
-    { value: 'pants', label: 'Pants' },
-    { value: 'shoes', label: 'Shoes' },
-    { value: 'accessories', label: 'Accessories' },
-    { value: 'jackets', label: 'Jackets' },
-    { value: 'dresses', label: 'Dresses' },
-    { value: 'sweaters', label: 'Sweaters' },
-];
-
-function SwitchInput({ name, label }: SwitchProps) {
+function SwitchInput({ name, label, options, optional, onChange }: SwitchProps) {
     const [field, meta, helpers] = useField(name);
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        helpers.setValue(event.target.value);
+        const value = event.target.value;
+        helpers.setValue(value);
+        if (onChange) {
+            onChange(value);
+        }
     };
 
     return (
         <section className='space-y-2'>
-            <label
+            {label !== 'Filter' && <label
                 htmlFor={name}
-                className={classNames('text-base pb-1', {
+                className={clsx('text-base pb-1', {
                     'text-gray-700': !meta.error || !meta.touched,
                     'text-red-500': meta.error && meta.touched,
                 })}
             >
                 {label}
-            </label>
+            </label>}
+
 
             <select
-                name={name}
-                value={field.value || 'select'}
+                id={name}
+                {...field}
                 onChange={handleChange}
-                className={clsx('w-full border-2 p-2 rounded border-[#E5E5E5]', meta.touched && meta.error && 'border-red-500')}
+                className={clsx('w-full border-2 px-5 py-3  rounded border-[#E5E5E5]', meta.touched && meta.error && 'border-red-500')}
                 aria-label="Category select"
             >
-                <option value='select' disabled>Select a category</option>
-                {categoryOptions.map(({ value, label }) => (
+                {optional && (
+                    <option value='' disabled>Select a category</option>
+                )}
+                {options.map(({ value, label }) => (
                     <option key={value} value={value}>
                         {label}
                     </option>
