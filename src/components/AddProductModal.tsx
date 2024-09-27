@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ProductForm from './Form/ProductForm'
 
 export default function AddProductModal() {
+
     let [isOpen, setIsOpen] = useState(false)
 
     function open() {
@@ -16,7 +17,7 @@ export default function AddProductModal() {
 
     return (
         <section className='pb-1'>
-            
+
             <Button
                 onClick={open}
                 className="px-5 py-3 flex text-sm font-base text-black bg-[#D9F99D] rounded items-center gap-2"
@@ -49,7 +50,7 @@ export default function AddProductModal() {
                                     <X />
                                 </Button>
                             </div>
-                            <ProductForm />
+                            <ProductForm setOpen={setIsOpen} />
 
                         </DialogPanel>
                     </div>

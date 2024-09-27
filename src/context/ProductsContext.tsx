@@ -8,22 +8,22 @@ interface ProductContextType {
     category: string
     setSearchTerm: (term: string) => void
     setCategory: (category: string) => void
+    updateProducts: (newProducts: ProductSchema[]) => void
 }
 
-const defaultContextValue = {
+const defaultContextValue: ProductContextType = {
     products: [],
     filteredProducts: [],
     searchTerm: '',
     category: '',
     setSearchTerm: () => { },
-    setCategory: () => { }
-
+    setCategory: () => { },
+    updateProducts: () => { }
 }
 
 export const ProductContext = createContext<ProductContextType>(defaultContextValue);
 
 export const ProductProvider = ({ children }: { children: ReactNode }) => {
-
     const [products, setProducts] = useState<ProductSchema[]>([])
     const [filteredProducts, setFilteredProducts] = useState<ProductSchema[]>([])
     const [searchTerm, setSearchTerm] = useState('')
@@ -34,14 +34,20 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
         if (storedProducts) {
             setProducts(JSON.parse(storedProducts))
         }
-    }, [])
+    }, [products])
 
     useEffect(() => {
         const filtered = products.filter(product =>
-            product.title.toLowerCase().includes(searchTerm.toLowerCase()) && (category === '' || product.category === category)
+            product.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+            (category === '' || product.category === category)
         )
         setFilteredProducts(filtered)
     }, [products, searchTerm, category])
+
+    const updateProducts = (newProducts: ProductSchema[]) => {
+        setProducts(newProducts)
+        localStorage.setItem('products', JSON.stringify(newProducts))
+    }
 
     return (
         <ProductContext.Provider
@@ -51,7 +57,8 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
                 searchTerm,
                 category,
                 setSearchTerm,
-                setCategory
+                setCategory,
+                updateProducts
             }}
         >
             {children}

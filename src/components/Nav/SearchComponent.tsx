@@ -1,19 +1,30 @@
-import React, { ChangeEvent, useTransition } from 'react';
+import React, { useEffect, useTransition } from 'react';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { Loader, Search } from 'lucide-react';
 import { useDebounce } from 'use-debounce';
 import { searchInitialValues, searchValidationSchema } from '../../utils/schema';
+import { useProducts } from '@/context/ProductsContext';
 
-
+interface SearchValues {
+    search: string;
+}
 
 function SearchComponent() {
-    const [debouncedValue] = useDebounce(searchInitialValues.search, 1000);
     const [isPending, startTransition] = useTransition();
+    const { setSearchTerm } = useProducts();
+    const [debouncedSearchTerm, setDebouncedSearchTerm] = React.useState('');
+    const [debouncedValue] = useDebounce(debouncedSearchTerm, 1000);
+
+    useEffect(() => {
+        startTransition(() => {
+            setSearchTerm(debouncedValue);
+        });
+    }, [debouncedValue, setSearchTerm]);
 
     const onSubmit = (values: SearchValues, { setSubmitting }: FormikHelpers<SearchValues>) => {
-        console.log(values.search);
-        console.log(debouncedValue);
+        setDebouncedSearchTerm(values.search);
         setSubmitting(false);
+
     };
 
     return (
@@ -33,7 +44,7 @@ function SearchComponent() {
                             ) : (
                                 <button
                                     type="button"
-                                    className='absolute z-10 -translate-y-1/2 right-2 top-1/2'
+                                    className='absolute z-10 -translate-y-1/2 cursor-pointer right-2 top-1/2'
                                     onClick={() => submitForm()}
                                     disabled={isSubmitting}
                                 >
@@ -43,12 +54,10 @@ function SearchComponent() {
                             <Field
                                 name='search'
                                 placeholder='Search For Your Product'
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                     const value = e.target.value;
                                     setFieldValue('search', value);
-                                    startTransition(() => {
-                                        console.log('abdul')
-                                    });
+                                    setDebouncedSearchTerm(value);
                                 }}
                                 className='w-full px-5 py-3 border rounded-md'
                             />

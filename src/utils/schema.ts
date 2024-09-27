@@ -1,8 +1,8 @@
 import * as Yup from 'yup'
 
 // -----------------------------product
-export const initialProductFormValues = {
-    productImage: {},
+export const initialProductFormValues: ProductFormValues = {
+    productImage: '',
     title: '',
     description: '',
     category: '',
@@ -10,21 +10,13 @@ export const initialProductFormValues = {
 }
 
 export const validationSchema = Yup.object().shape({
-    productImage: Yup.mixed()
-        .required('A file is required')
-        .test('fileType', 'Unsupported file format', (value) => {
-            if (value && value instanceof File) {
-                return ['image/jpeg', 'image/png', 'image/gif'].includes(
-                    value.type
-                )
-            }
-            return false
-        }),
-    title: Yup.string().required('Title is Required'),
+    productImage: Yup.string().required('Image is required'),
+    title: Yup.string().required('Title is required'),
     description: Yup.string().required('Description is required'),
     category: Yup.string().required('Category is required'),
     itemPrice: Yup.string().required('Item price is required'),
 })
+
 // --------------------------------filter
 export const initialFilterFormValues = {
     filter: '',

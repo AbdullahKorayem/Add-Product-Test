@@ -3,10 +3,13 @@ import SwitchInput from '../Form/SwitchInput';
 import { filterOptions } from '../../utils/lib';
 import { Form, Formik } from 'formik';
 import { initialFilterFormValues, validationFilterSchema } from '../../utils/schema';
+import { useProducts } from '@/context/ProductsContext';
 
 function SwitchFilter() {
+    const { setCategory } = useProducts();
+
     const handleChange = (values: typeof initialFilterFormValues) => {
-        console.log(values.filter);
+        setCategory(values.filter)
     };
 
     return (<>

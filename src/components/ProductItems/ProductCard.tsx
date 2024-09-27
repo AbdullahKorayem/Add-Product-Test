@@ -1,20 +1,20 @@
 import { Heart } from 'lucide-react'
 import icon from '/currency-pound-1.svg';
-import React from 'react'
 
-function ProductCard() {
+
+function ProductCard({ itemPrice, title, productImage }: ProductCardProps) {
     return (
         <section className='space-y-2 rounded w-96'>
             <div className='w-full '>
-                <img className='rounded' src="https://images.unsplash.com/photo-1726711340699-952d47133b21?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8" alt="" />
+                <img className='rounded' src={productImage || "https://images.unsplash.com/photo-1726711340699-952d47133b21?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8"} alt="" />
             </div>
             <div className='space-y-1'>
                 <div className='flex justify-between'>
                     <div className='space-y-1'>
-                        <h1 className='font-light'>producName</h1>
-                         <span className="flex font-normal">
+                        <h1 className='font-light'>{title}</h1>
+                        <span className="flex font-normal">
                             <img src={icon} alt="icon" />
-                            <h2> 30</h2>
+                            <h2> {itemPrice}</h2>
                         </span>
                     </div>
                     <div>

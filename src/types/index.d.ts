@@ -2,6 +2,14 @@ interface optionsData {
     value: string
     label: string
 }
+interface ProductFormValues {
+    productImage: string
+    title: string
+    description: string
+    category: string
+    itemPrice: string
+}
+
 interface SwitchProps {
     name?: string | FieldHookConfig<any>
     label?: string
@@ -18,14 +26,14 @@ interface ProductSchema {
     title: string
     description: string
     category: string
-    itemPrice: string
-    productImage: {
-        lastModified?: number
-        lastModifiedDate?: Date
-        name?: string
-        size?: number
-        type?: string
-        relativePath?: string
-    } | null
+    itemPrice: string 
+    productImage: string
 }
+
+interface ProductCardProps {
+    itemPrice: string
+    title: string
+    productImage?: string
+}
+
 
