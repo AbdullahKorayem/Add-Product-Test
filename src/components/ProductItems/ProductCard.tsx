@@ -2,9 +2,9 @@ import { Heart } from 'lucide-react';
 import icon from '/currency-pound-1.svg';
 import { formatCurrencyString } from '@/utils/mask';
 
-function ProductCard({ itemPrice, title, productImage }: ProductCardProps) {
+function ProductCard({ itemPrice, title, productImage ,category }: ProductCardProps) {
     return (
-        <section className='space-y-2 duration-200 rounded w-96 group hover:shadow-sm'>
+        <section className='space-y-2 duration-200 rounded w-80 group hover:shadow-sm'>
             <div className='w-full '>
                 <img
                     className='object-cover w-full duration-300 rounded h-60 group-hover:scale-[1.007] '
@@ -19,7 +19,8 @@ function ProductCard({ itemPrice, title, productImage }: ProductCardProps) {
                         <span className="flex font-normal">
                             <img src={icon} alt="icon" />
                             <h2>{formatCurrencyString(`${itemPrice}`)}</h2>
-                        </span>
+                            </span>
+                            <h2>{ category}</h2>
                     </div>
                     <div>
                         <button className='p-1 border-2 border-[#E5E5E5] rounded'>

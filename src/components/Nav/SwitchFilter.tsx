@@ -1,41 +1,70 @@
-import SwitchInput from '../Form/SwitchInput';
+import React from 'react';
 import { Form, Formik } from 'formik';
-import { initialFilterFormValues, validationFilterSchema } from '../../utils/schema';
-import { useProducts } from '@/context/ProductsContext';
-import { filterOptions } from '@/utils/utils';
+import * as Yup from 'yup';
+import SwitchInput from '../Form/SwitchInput';
 
-function SwitchFilter() {
-    const { setSwitchValue } = useProducts();
+type OptionType = {
+    value: string;
+    label: string;
+};
 
-    const handleChange = (values: typeof initialFilterFormValues) => {
-        setSwitchValue(values.filter)
+type SwitchFilterProps = {
+    title?: string;
+    name: string;
+    options: OptionType[];
+    initialValue?: string;
+    onChange?: (value: string) => void;
+};
+
+const SwitchFilter: React.FC<SwitchFilterProps> = ({
+    title,
+    name,
+    options,
+    initialValue = '',
+    onChange
+}) => {
+
+    const initialValues = {
+        [name]: initialValue
     };
 
-    return (<>
-        <h1 className='text-clamp-sm'>Sort By</h1>
-        <section>
+    const validationSchema = Yup.object().shape({
+        [name]: Yup.string().optional()
+    });
+
+    const handleChange = (value: string) => {
+
+        if (onChange) {
+            onChange(value);
+        }
+    };
+
+    return (
+        <div className="mb-4">
+            {/*
+                
+                <h2 className="mb-2 font-semibold text-clamp-sm">{title === 'filter' ? 'Sort By Filters' : 'Show By Category'}</h2>/}
+                */}
             <Formik
-                initialValues={initialFilterFormValues}
-                validationSchema={validationFilterSchema}
+                initialValues={initialValues}
+                validationSchema={validationSchema}
                 onSubmit={() => { }}
             >
-                {({ values, setFieldValue }) => (
-                    <Form className="">
+                {({ setFieldValue }) => (
+                    <Form>
                         <SwitchInput
-                            name="filter"
-                            label="Filter"
-                            options={filterOptions}
+                            name={name}
+                            options={options}
                             onChange={(value) => {
-                                setFieldValue('filter', value);
-                                handleChange({ ...values, filter: value });
+                                setFieldValue(name, value);
+                                handleChange(value);
                             }}
                         />
                     </Form>
                 )}
             </Formik>
-        </section>
-    </>
+        </div>
     );
-}
+};
 
 export default SwitchFilter;

@@ -9,18 +9,20 @@ function ProductView() {
     const hasFilteredProducts = filteredProducts.length > 0;
 
     return (
-        <div className="flex flex-wrap items-center gap-6 p-5 space-y-4 align-baseline max-w-screen-3xl lg:flex-row">
+        <div className="flex flex-wrap items-center justify-center gap-6 p-5 space-y-4 max-w-screen-3xl lg:flex-row">
             {hasNoProducts ? (
                 <>
-                <img src={addProduct} alt="Add Product" className='pt-10 w-60' />
+                    <img src={addProduct} alt="Add Product" className='pt-10 w-60' />
                 </>
             ) : (
-                (hasFilteredProducts ? currentProducts : currentProducts).map(product => (
+                    (hasFilteredProducts ? currentProducts : currentProducts).map(product => (
+                    
                     <ProductCard
                         key={product.id}
                         title={product.title}
                         productImage={product.productImage}
                         itemPrice={product.itemPrice}
+                        category={product.category}
                     />
                 ))
             )}

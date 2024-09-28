@@ -2,18 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { ErrorMessage, useField } from 'formik';
 
-interface Option {
-    value: string;
-    label: string;
-}
 
-interface SwitchProps {
-    name: string;
-    label: string;
-    options: Option[];
-    optional?: boolean;
-    onChange?: (value: string) => void;
-}
 
 function SwitchInput({ name, label, options, optional, onChange }: SwitchProps) {
     const [field, meta, helpers] = useField(name);

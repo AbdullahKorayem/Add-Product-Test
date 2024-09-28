@@ -26,7 +26,7 @@ interface ProductSchema {
     title: string
     description: string
     category: string
-    itemPrice: number 
+    itemPrice: number
     productImage: string
 }
 
@@ -34,6 +34,18 @@ interface ProductCardProps {
     itemPrice: number
     title: string
     productImage?: string
+    category: string
 }
 
+interface Option {
+    value: string
+    label: string
+}
 
+interface SwitchProps {
+    name: string
+    label?: string
+    options: Option[]
+    optional?: boolean
+    onChange?: (value: string) => void
+}

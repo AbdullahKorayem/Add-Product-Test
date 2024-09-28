@@ -6,8 +6,10 @@ interface ProductContextType {
     currentProducts: ProductSchema[];
     searchTerm: string;
     switchValue: string;
+    switchCategory: string;
     setSearchTerm: (term: string) => void;
     setSwitchValue: (switchValue: string) => void;
+    setSwitchCategory: (switchCategory: string) => void;
     setCurrentPage: (page: number) => void;
     nextPage: () => void;
     prevPage: () => void;
@@ -24,8 +26,10 @@ const defaultContextValue: ProductContextType = {
     currentProducts: [],
     searchTerm: '',
     switchValue: '',
+    switchCategory:'',
     setSearchTerm: () => { },
     setSwitchValue: () => { },
+    setSwitchCategory: () => { },
     setCurrentPage: () => { },
     nextPage: () => { },
     prevPage: () => { },
@@ -43,6 +47,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     const [filteredProducts, setFilteredProducts] = useState<ProductSchema[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [switchValue, setSwitchValue] = useState<string>('');
+    const [switchCategory, setSwitchCategory] = useState<string>('');
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 4;
 
@@ -86,7 +91,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     }
     useEffect(() => {
         let filtered = products.filter(product =>
-            product.title.toLowerCase().includes(searchTerm.toLowerCase())
+            product.title.toLowerCase().includes(searchTerm.toLowerCase()) || product.category.toLocaleLowerCase().includes(searchTerm.toLowerCase())
         );
 
 
@@ -105,8 +110,18 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
             }
         })();
 
+        filtered = (() => {
+            if (switchCategory) {
+                return filtered.filter(product => product.category.toLowerCase() === switchCategory.toLowerCase());
+            }
+            return filtered;
+        })();
+      
+
+
+
         setFilteredProducts(filtered);
-    }, [products, searchTerm, switchValue]);
+    }, [products, searchTerm, switchValue ,switchCategory]);
 
     const updateProducts = (newProducts: ProductSchema[]) => {
         setProducts(newProducts);
@@ -121,6 +136,8 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
             currentProducts,
             searchTerm,
             switchValue,
+            setSwitchCategory,
+            switchCategory,
             setSearchTerm,
             setSwitchValue,
             setCurrentPage,
