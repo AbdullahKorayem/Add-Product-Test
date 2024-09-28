@@ -17,7 +17,6 @@ type SwitchFilterProps = {
 };
 
 const SwitchFilter: React.FC<SwitchFilterProps> = ({
-    title,
     name,
     options,
     initialValue = '',
@@ -42,7 +41,6 @@ const SwitchFilter: React.FC<SwitchFilterProps> = ({
     return (
         <div className="mb-4">
             {/*
-                
                 <h2 className="mb-2 font-semibold text-clamp-sm">{title === 'filter' ? 'Sort By Filters' : 'Show By Category'}</h2>/}
                 */}
             <Formik

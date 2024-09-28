@@ -20,10 +20,12 @@ export default function AddProductModal() {
 
             <Button
                 onClick={open}
-                className="md:px-5 md:py-3 px-3 py-2 flex text-clamp-xs font-base text-black bg-[#D9F99D] rounded items-center gap-2"
+                className="md:px-5 md:py-3 px-3 py-2 flex  text-black bg-[#D9F99D] rounded items-center gap-2"
             >
                 <Plus />
+                <span className='text-clamp-xs font-base'>
                 Sell an item
+                </span>
             </Button>
 
             <Dialog
@@ -37,7 +39,7 @@ export default function AddProductModal() {
                     <div className="flex items-center justify-center min-h-full p-4">
                         <DialogPanel
                             transition
-                            className="w-3/4 rounded bg-[#FFFFFF] p-10 shadow-lg transition-all duration-300 ease-in-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+                            className="md:w-3/4 w-full rounded bg-[#FFFFFF] p-10 shadow-lg transition-all duration-300 ease-in-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
                         >
                             <div className="flex items-center justify-between mb-5">
                                 <DialogTitle  className="font-medium text-black text-clamp-sm ">

@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { ErrorMessage, useField } from 'formik';
 
 
-
 function SwitchInput({ name, label, options, optional, onChange }: SwitchProps) {
     const [field, meta, helpers] = useField(name);
 
