@@ -43,7 +43,7 @@ function SwitchInput({ name, label, options, optional, onChange }: SwitchProps) 
                 id={name}
                 {...field}
                 onChange={handleChange}
-                className={clsx('w-full border-2 px-5 py-3  rounded border-[#E5E5E5]', meta.touched && meta.error && 'border-red-500')}
+                className={clsx('w-full border-2 md:px-5 md:py-3 px-3 py-2  rounded border-[#E5E5E5]', meta.touched && meta.error && 'border-red-500')}
                 aria-label="Category select"
             >
                 {optional && (

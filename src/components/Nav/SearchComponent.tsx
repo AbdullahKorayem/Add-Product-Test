@@ -25,10 +25,11 @@ function SearchComponent() {
         setDebouncedSearchTerm(values.search);
         setSubmitting(false);
 
+
     };
 
     return (
-        <section className='w-1/2'>
+        <section className='w-full md:w-1/2'>
             <Formik
                 initialValues={searchInitialValues}
                 validationSchema={searchValidationSchema}
@@ -36,7 +37,7 @@ function SearchComponent() {
             >
                 {({ isSubmitting, setFieldValue, values, submitForm }) => (
                     <Form>
-                        <div className='relative'>
+                        <div className='relative '>
                             {isPending && values.search.length >= 3 ? (
                                 <div className='absolute -translate-y-1 right-2 top-1/2'>
                                     <Loader className="text-gray-400 text-muted-foreground animate-spin" />
@@ -44,7 +45,7 @@ function SearchComponent() {
                             ) : (
                                 <button
                                     type="button"
-                                    className='absolute z-10 -translate-y-1/2 cursor-pointer right-2 top-1/2'
+                                    className='absolute z-10 pl-5 -translate-y-1/2 cursor-pointer right-2 top-1/2'
                                     onClick={() => submitForm()}
                                     disabled={isSubmitting}
                                 >
@@ -53,13 +54,13 @@ function SearchComponent() {
                             )}
                             <Field
                                 name='search'
-                                placeholder='Search For Your Product'
+                                placeholder='Search ...'
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                     const value = e.target.value;
                                     setFieldValue('search', value);
                                     setDebouncedSearchTerm(value);
                                 }}
-                                className='w-full px-5 py-3 border rounded-md'
+                                className='w-full px-3 py-2 border rounded-md md:px-5 md:py-3'
                             />
                         </div>
                     </Form>

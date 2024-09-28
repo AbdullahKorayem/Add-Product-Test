@@ -5,12 +5,13 @@ import UploadImage from './UploadImage';
 import CustomInput from './CustomInput';
 import SwitchInput from './SwitchInput';
 import PriceInput from './PriceInput';
-import { categoryOptions } from '../../utils/lib';
-import { setLocaleStorage } from '@/utils/fucntions';
+
 import { v4 as uuidv4 } from 'uuid';
 import { Toaster, toast } from 'sonner';
 import { Loader } from 'lucide-react';
+import { useProducts } from '@/context/ProductsContext';
 import { initialProductFormValues, validationSchema } from '@/utils/schema';
+import { categoryOptions } from '@/utils/utils';
 
 type ProductFormProps = {
     setOpen: (open: boolean) => void;
@@ -19,22 +20,25 @@ type ProductFormProps = {
 
 const ProductForm: React.FC<ProductFormProps> = ({ setOpen }) => {
     const [previewUrl, setPreviewUrl] = useState<string>('');
+    const { addItem } = useProducts();
 
     const onSubmit = async (
         values: ProductFormValues,
         { setSubmitting, resetForm }: FormikHelpers<ProductFormValues>
     ) => {
         try {
-            const productsWithId = {
+            console.log(+values.itemPrice.replace(',', ''))
+            const productsWithId: ProductSchema = {
                 ...values,
+                itemPrice: parseFloat(values.itemPrice.replace(',', '')),  
                 id: uuidv4(),
                 productImage: previewUrl,
             };
-            setLocaleStorage(productsWithId);
+            addItem(productsWithId);
             toast.success('Product uploaded successfully!');
             resetForm();
             setPreviewUrl('');
-            setOpen(false); // Close the form after submission
+            setOpen(false);
         } catch (error) {
             console.error(error); // Log the error for debugging
             toast.error('Something went wrong!');

@@ -1,3 +1,11 @@
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+
 export const categoryOptions = [
     { value: 'shirts', label: 'Shirts' },
     { value: 'pants', label: 'Pants' },
@@ -9,10 +17,8 @@ export const categoryOptions = [
 ]
 
 export const filterOptions = [
-    { value: 'A-Z', label: 'A-Z' },
-    { value: 'Z-A', label: 'Z-A' },
+    { value: 'a-z', label: 'A-Z' },
+    { value: 'z-a', label: 'Z-A' },
     { value: 'low', label: 'Price:Low to High' },
     { value: 'high', label: 'Price:High to Low' },
 ]
-
-

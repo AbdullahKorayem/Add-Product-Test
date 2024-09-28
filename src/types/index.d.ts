@@ -26,12 +26,12 @@ interface ProductSchema {
     title: string
     description: string
     category: string
-    itemPrice: string 
+    itemPrice: number 
     productImage: string
 }
 
 interface ProductCardProps {
-    itemPrice: string
+    itemPrice: number
     title: string
     productImage?: string
 }
