@@ -3,18 +3,7 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import SwitchInput from '../Form/SwitchInput';
 
-type OptionType = {
-    value: string;
-    label: string;
-};
 
-type SwitchFilterProps = {
-    title?: string;
-    name: string;
-    options: OptionType[];
-    initialValue?: string;
-    onChange?: (value: string) => void;
-};
 
 const SwitchFilter: React.FC<SwitchFilterProps> = ({
     name,
@@ -39,10 +28,7 @@ const SwitchFilter: React.FC<SwitchFilterProps> = ({
     };
 
     return (
-        <div className="mb-4">
-            {/*
-                <h2 className="mb-2 font-semibold text-clamp-sm">{title === 'filter' ? 'Sort By Filters' : 'Show By Category'}</h2>/}
-                */}
+        <div className="mb-3">
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}

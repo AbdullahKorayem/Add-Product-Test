@@ -16,7 +16,7 @@ export default function PaginationComponent() {
         <Pagination className="pt-5">
             <PaginationContent className="flex items-center justify-between w-full">
                 <PaginationItem>
-                    <PaginationPrevious href="#" onClick={prevPage} />
+                    <PaginationPrevious href="#" onClick={prevPage} className="border-[#D9F99D] border-1" />
                 </PaginationItem>
                 <div className="flex items-center justify-center flex-grow space-x-2">
                     {/* Dynamically generate page numbers based on totalPages */}
@@ -35,7 +35,7 @@ export default function PaginationComponent() {
                     {totalPages > 3 && <PaginationItem><PaginationEllipsis /></PaginationItem>}
                 </div>
                 <PaginationItem>
-                    <PaginationNext href="#" onClick={nextPage} />
+                    <PaginationNext href="#" onClick={nextPage} className="border-[#D9F99D] border-1"  />
                 </PaginationItem>
             </PaginationContent>
         </Pagination>

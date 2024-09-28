@@ -59,7 +59,7 @@ const PriceInput: React.FC<CustomInputProps> = ({
                     className={inputClass}
                     aria-invalid={meta.error && meta.touched ? "true" : "false"}
                     aria-describedby={`${name}-error`}
-                    onChange={handleChange} // Use the custom change handler
+                    onChange={handleChange}
                 />
                 <div className={'absolute inset-y-0 flex items-center gap-2 right-4'}>
                     {meta.error && meta.touched && (

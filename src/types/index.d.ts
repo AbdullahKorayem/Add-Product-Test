@@ -49,3 +49,16 @@ interface SwitchProps {
     optional?: boolean
     onChange?: (value: string) => void
 }
+
+type OptionType = {
+    value: string
+    label: string
+}
+
+type SwitchFilterProps = {
+    title?: string
+    name: string
+    options: OptionType[]
+    initialValue?: string
+    onChange?: (value: string) => void
+}
